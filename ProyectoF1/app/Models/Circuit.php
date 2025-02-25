@@ -9,4 +9,10 @@ class Circuit extends Model
 {
     /** @use HasFactory<\Database\Factories\CircuitFactory> */
     use HasFactory;
+
+    protected $guarded = [];
+
+    public function races() {
+        return $this->hasMany(Race::class);
+    }
 }
