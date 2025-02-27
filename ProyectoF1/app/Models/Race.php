@@ -9,4 +9,9 @@ class Race extends Model
 {
     /** @use HasFactory<\Database\Factories\RaceFactory> */
     use HasFactory;
+
+    public function circuit()
+    {
+        return $this->belongsTo(Circuit::class);
+    }
 }

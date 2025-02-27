@@ -11,10 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('teams', function (Blueprint $table) {
+        Schema::create('drivers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('logo')->nullable();
+            $table->foreignId('team_id')->constrained('teams')->onDelete('cascade');
+            $table->string('photo')->nullable();
+            $table->string('nationality');
+            $table->date('date_of_birth');
+            $table->integer('number')->unique();
             $table->timestamps();
         });
     }
@@ -24,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('teams');
+        Schema::dropIfExists('drivers');
     }
 };

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Race;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class RaceController extends Controller

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('location');
             $table->float('length');
             $table->string('lap_record')->nullable();
+            $table->integer('capacity');
+            $table->integer('first_grand_prix');
             $table->timestamps();
         });
     }

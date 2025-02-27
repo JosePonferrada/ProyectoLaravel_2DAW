@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->date('date');
-            $table->foreignId('circuit_id')->constrained('circuits')->onDelete('cascade');
+            $table->integer('laps');
+            $table->string('weather');
             $table->timestamps();
         });
     }
