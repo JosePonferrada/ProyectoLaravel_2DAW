@@ -17,6 +17,7 @@ return new class extends Migration
             $table->date('date');
             $table->integer('laps');
             $table->string('weather');
+            $table->foreignId('circuit_id')->constrained('circuits'); // Relación 1:N con la tabla circuits
             $table->timestamps();
         });
     }

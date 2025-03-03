@@ -161,30 +161,34 @@ class DatabaseSeeder extends Seeder
                 'date' => '2025-05-25',
                 'laps' => 78,
                 'weather' => 'Sunny',
+                'circuit_id' => 1,
             ],
             [
                 'name' => 'British Grand Prix',
                 'date' => '2025-07-06',
                 'laps' => 52,
                 'weather' => 'Cloudy',
+                'circuit_id' => 2,
             ],
             [
                 'name' => 'Japanese Grand Prix',
                 'date' => '2025-10-05',
                 'laps' => 53,
                 'weather' => 'Rainy',
+                'circuit_id' => 3,
             ],
         ]);
 
-        // Borramos todos los datos de la tabla `circuit_race` antes de insertar nuevos datos
-        DB::table('circuit_race')->delete();
-
-        // Insertar datos en la tabla `circuit_race`
-        DB::table('circuit_race')->insert([
-            ['circuit_id' => 1, 'race_id' => 1],
-            ['circuit_id' => 2, 'race_id' => 2],
-            ['circuit_id' => 3, 'race_id' => 3],
+        // Para la tabla pivote `race_driver`
+        DB::table('race_driver')->insert([
+            ['race_id' => 1, 'driver_id' => 1, 'position' => 1, 'points' => 25],
+            ['race_id' => 1, 'driver_id' => 2, 'position' => 2, 'points' => 18],
+            ['race_id' => 1, 'driver_id' => 3, 'position' => 3, 'points' => 15],
+            ['race_id' => 2, 'driver_id' => 2, 'position' => 1, 'points' => 25],
+            ['race_id' => 2, 'driver_id' => 1, 'position' => 2, 'points' => 18],
+            ['race_id' => 2, 'driver_id' => 3, 'position' => 5, 'points' => 10],
         ]);
+        
 
     }
 }

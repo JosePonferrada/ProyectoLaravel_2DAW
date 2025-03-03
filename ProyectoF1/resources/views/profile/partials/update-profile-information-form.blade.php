@@ -54,12 +54,21 @@
         </div>
 
         {{-- To make the user able to change his profile picture --}}
+        @if ($user->profile_photo)
+            <img src="{{ asset('storage/' . $user->profile_photo)  }}" alt="Profile Photo" class="rounded-full h-10 w-10 object-cover">
+        @endif
 
         <div>
             <label for="avatar" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Profile picture') }}</label>
             <input type="file" id="avatar" name="avatar" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
             <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="avatar_help">{{ __('A profile picture is optional as you can set it up later.') }}</p>
         </div>
+
+        @if (session('status') === 'profile-photo-deleted')
+            <div class="mb-4 font-medium text-sm text-green-600">
+                {{ __('Profile photo has been removed.') }}
+            </div>
+        @endif
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>

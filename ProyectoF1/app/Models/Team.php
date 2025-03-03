@@ -10,6 +10,8 @@ class Team extends Model
     /** @use HasFactory<\Database\Factories\TeamFactory> */
     use HasFactory;
 
+    protected $guarded = [];
+
     public function drivers()
     {
         return $this->hasMany(Driver::class);

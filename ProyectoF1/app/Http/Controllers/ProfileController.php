@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -28,6 +29,18 @@ class ProfileController extends Controller
     {
         $request->user()->fill($request->validated());
 
+        // Handle profile photo upload
+        if ($request->hasFile('avatar')) {
+            // Delete old profile photo if exists
+            if ($request->user()->profile_photo) {
+                Storage::disk('public')->delete($request->user()->profile_photo);
+            }
+            
+            // Store the new profile photo
+            $path = $request->file('avatar')->store('profile-photos', 'public');
+            $request->user()->profile_photo = $path;
+        }
+
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
@@ -42,6 +55,11 @@ class ProfileController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
+        // If user has a profile photo, delete it
+        if ($request->user()->profile_photo) {
+            Storage::disk('public')->delete($request->user()->profile_photo);
+        }
+        
         $request->validateWithBag('userDeletion', [
             'password' => ['required', 'current_password'],
         ]);
@@ -56,5 +74,24 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    /**
+     * Delete the user's profile photo.
+     */
+    public function deletePhoto(Request $request): RedirectResponse
+    {
+        $user = $request->user();
+        
+        // Delete profile photo from storage
+        if ($user->profile_photo) {
+            Storage::disk('public')->delete($user->profile_photo);
+            
+            // Remove the profile photo path from the user record
+            $user->profile_photo = null;
+            $user->save();
+        }
+        
+        return Redirect::route('profile.edit')->with('status', 'profile-photo-deleted');
     }
 }

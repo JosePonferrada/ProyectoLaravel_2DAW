@@ -15,13 +15,15 @@ class VerifyEmailController extends Controller
     public function __invoke(EmailVerificationRequest $request): RedirectResponse
     {
         if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended(route('dashboard', absolute: false).'?verified=1');
+            return redirect()->intended(route('dashboard', absolute: false))
+                ->with('status', 'Tu correo electrónico ya está verificado.');
         }
 
         if ($request->user()->markEmailAsVerified()) {
             event(new Verified($request->user()));
         }
 
-        return redirect()->intended(route('dashboard', absolute: false).'?verified=1');
+        return redirect()->intended(route('dashboard', absolute: false))
+            ->with('status', '¡Gracias! Tu correo electrónico ha sido verificado. Ahora puedes acceder a todas las funcionalidades de F1 Stats.');
     }
 }
