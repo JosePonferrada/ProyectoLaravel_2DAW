@@ -11,7 +11,7 @@
             <!-- Banner de bienvenida -->
             <div class="bg-gradient-to-r from-red-600 to-red-800 overflow-hidden shadow-xl sm:rounded-lg mb-6">
                 <div class="p-8">
-                    <h2 class="text-3xl font-bold text-white mb-4">¡Bienvenido a F1 Manager, {{ Auth::user()->name }}!</h2>
+                    <h2 class="text-3xl font-bold text-white mb-4">¡Bienvenido a F1 Stats, {{ Auth::user()->name }}!</h2>
                     <p class="text-white text-lg">Tu portal para seguir toda la emoción de la Fórmula 1.</p>
                 </div>
             </div>
@@ -82,7 +82,7 @@
                     <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Próxima carrera</h3>
                     <div class="flex flex-col md:flex-row items-center">
                         <div class="w-full md:w-1/3 mb-4 md:mb-0">
-                            <img src="{{ asset('images/circuit-placeholder.jpg') }}" alt="Circuito" class="rounded-lg w-full h-48 object-cover">
+                            <img src="{{ asset('https://cdn3.iconfinder.com/data/icons/race-tracks/100/Race_tracks-Icons-65-512.png') }}" alt="Circuito" class="rounded-lg w-full h-48 object-cover">
                         </div>
                         <div class="md:ml-6 w-full md:w-2/3">
                             <h4 class="text-lg font-semibold text-gray-900 dark:text-white">Gran Premio de Barcelona</h4>
